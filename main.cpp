@@ -1,7 +1,10 @@
 #include <iostream>
-
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+#include "Menu.h"
 
 int main(int argc, char** argv) {
+	Menu menu;
+	
+	int opcion_menu = menu.menu_principal();
 	return 0;
 }
+
