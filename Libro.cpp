@@ -2,6 +2,7 @@
 #include <string.h>
 #include <iostream>
 #include "Archivo.h"
+#include "Utils.h"
 
 Libro::Libro()
 {
@@ -188,8 +189,7 @@ int Libro::ConsultarConsola(TArchivo<Libro> * archivo)
 
 void Libro::HacerEncabezado() {
 	std::cout << "LISTADO DE LIBROS" << std::endl;
-	std::cout << "===============================================" << std::endl;
-	//std::cout << "#\tNombre\t\tCedula" << std::endl;
+	Utils::imprimir_separador('=');
 }
 
 void Libro::Mostrar(long indice) {

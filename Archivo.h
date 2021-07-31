@@ -21,7 +21,7 @@ class TArchivo:public fstream
         T buf;         // Registro o bloque de datos que almacena el archivo
         char nom[40];  // Nombre del archivo registrado en el almacenamiento secundario
     public:
-        TArchivo(char *no="SinNombre.dat"){ strcpy(nom,no);              }
+        TArchivo(const char *no="SinNombre.dat"){ strcpy(nom,no);              }
         //TArchivo() {}
         char *Get_nomb()                  { return nom;                  }
         void  Reset()     { open(nom, ios::out | ios::binary ); close(); }
@@ -84,7 +84,7 @@ int TArchivo<T>::Acceder(int idx)
 	read((char *)&buf, sizeof(buf));
 	if (eof()) return ARCHIVO_ERR_EOF;
 
-	if (buf.IsDefault()) return ARCHIVO_ERR_NOT_FOUND;
+	if (buf.IsDefault()) return ARCHIVO_ERR_NO_ENCONTRADO;
 	
 	close();
 
@@ -97,7 +97,7 @@ int TArchivo<T>::Listar()
 {
     open(nom, ios::binary | ios::in);
     if ( fail() || bad() )
-        return 0;
+        return ARCHIVO_ERR_ABRIR;
     buf.HacerEncabezado();
 
     long registro_contador = 0;
@@ -117,7 +117,7 @@ int TArchivo<T>::Listar()
 		}
     }
     close();
-    return 1;
+    return 0;
 }
 
 // Modifica un registro del archivo posicionando y sobreescribiendo.

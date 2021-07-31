@@ -5,10 +5,9 @@
 #include <iostream>
 #include "Archivo.h"
 
+#define ARCHIVO_LIBRO_NOMBRE "libro.dat"
 #define CADENA_MAX 40
-
 #define CANTIDAD_LIBROS_MIN 1
-
 #define LIBROS_ERR_MIN_CANT_ALCANZADA -1
 
 class Libro
