@@ -4,6 +4,7 @@
 #include <vector>
 #include "Archivo.h"
 #include "Libro.h"
+#include "Ordenamiento.h"
 
 using namespace std;
 
@@ -121,12 +122,23 @@ int Menu::ordenamiento_ram(vector<Libro> &libros_vec) {
 	
 	switch (opcion) {
 		case MENU_ORD_ARCHIVO_SHELLSORT:
-			break;
+			{
+				int testcase[] = {15, 67, 8, 16, 44, 27, 12, 35, 56, 21, 13, 28, 60, 36, 7, 10};
+				const int testcase_length = sizeof(testcase) / sizeof(testcase[0]);
+				Ordenamiento::shell_sort(testcase, testcase_length);
+				cout << "DEBUG SHOWCASE: Ordenado: ";
+				for (int i = 0; i < testcase_length; i++) {
+					cout << testcase[i] << " ";
+				}
+				cout << endl;
+				system("pause");
+				break;
+			}
 		case MENU_ORD_ARCHIVO_QUICKSORT:
 			break;
 	}
 	
-	cout << "Los libros en RAM han sido ordenados!";
+	cout << "Los libros en RAM han sido ordenados!" << endl;
 	system("pause");
 	return 0;
 }

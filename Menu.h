@@ -14,6 +14,7 @@
 
 #include <vector>
 #include "Libro.h"
+#include "Ordenamiento.h"
 
 using namespace std;
 
@@ -25,6 +26,8 @@ class Menu
 		int listar_libros();
 		int cargar_libros_ram(vector<Libro> &libros_vec);
 		int ordenamiento_ram(vector<Libro> &libros_vec);
+		int busq_bin_ram(vector<Libro> &libros_vec);
+		int busq_seq_archivos();
 	protected:
 };
 
