@@ -14,7 +14,7 @@ class Libro
 {
 	public:
 		Libro();
-		Libro(char * titulo, char * cota, char * autor, int cantidad_disponible);
+		Libro(const char * titulo, const char * cota, const char * autor, int cantidad_disponible);
 
 		char * GetCota();
 		char * GetTitulo();

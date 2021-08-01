@@ -14,7 +14,7 @@ Libro::Libro()
 	this->cantidad_disponible = CANTIDAD_LIBROS_MIN;
 }
 
-Libro::Libro(char * titulo, char * cota, char * autor, int cantidad_disponible)
+Libro::Libro(const char * titulo, const char * cota, const char * autor, int cantidad_disponible)
 {
 	strcpy(this->titulo, titulo);
 	strcpy(this->cota, cota);
@@ -256,6 +256,8 @@ bool Libro::operator >(const Libro &b) const {
 }
 
 bool Libro::operator <=(const Libro &b) const {
+	cout << "this: " << this->cota << endl;
+	cout << "other: " << b.cota << endl;
 	return strcmp(this->cota, b.cota) <= 0;
 }
 

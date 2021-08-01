@@ -45,7 +45,7 @@ class Ordenamiento
 		    while (band) {
 		        band = false;
 
-		        while (arr[pos] <= arr[derecho] && pos != derecho) {
+		        while ((arr[pos] <= arr[derecho]) && (pos != derecho)) {
 		            derecho -= 1;
 		        }
 
@@ -55,7 +55,7 @@ class Ordenamiento
 		            arr[derecho] = aux;
 		            pos = derecho;
 		
-		            while (arr[pos] >= arr[izquierdo] && pos != izquierdo) {
+		            while ((arr[pos] >= arr[izquierdo]) && (pos != izquierdo)) {
 		                izquierdo += 1;
 		            }
 
@@ -69,8 +69,8 @@ class Ordenamiento
 		        }
 		    }
 
-		    if ((pos - 1) > inicio) {
-		        quicksort_recursivo_reduce<T>(arr, inicio, pos - 1);
+		    if ((pos - 1) > inicio && pos != 0) {
+		        Ordenamiento::quicksort_recursivo_reduce<T>(arr, inicio, pos - 1);
 		    }
 
 		    if (fin > (pos + 1)) {

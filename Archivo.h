@@ -9,6 +9,7 @@
 #define ARCHIVO_ERR_NO_ENCONTRADO -1
 #define ARCHIVO_ERR_EOF -11
 #define ARCHIVO_ERR_NOT_FOUND -12
+#define ARCHIVO_ERR_GENERAL -99
 
 using namespace std;
 
@@ -41,7 +42,7 @@ int TArchivo<T>::Insertar(T nue)
 {
     open(nom, ios::out | ios::app | ios::binary );
     if ( fail() || bad() )
-        return 0;
+        return ARCHIVO_ERR_GENERAL;
     write((char *)&nue, sizeof(nue));
     close();
     return 1;
