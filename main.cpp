@@ -35,6 +35,7 @@ int main(int argc, char** argv) {
 				menu.busq_bin_ram(libros_vec);
 				break;
 			case MENU_PRINCIPAL_BUSQ_SEQ_ARCHIVO:
+				menu.busq_seq_archivos();
 				break;
 			case MENU_PRINCIPAL_GENERAR_LIBROS:
 				menu.generar_libros_random(libros_vec);

@@ -173,7 +173,7 @@ int Menu::busq_bin_ram(vector<Libro> &libros_vec) {
 	if (busq_result == BUSQ_BIN_NO_ENCONTRADO) {
 		cout << "Cota no encontrada" << endl;
 	} else {
-		cout << "Cota encontrada en posicion: " << busq_result << endl;
+		cout << "Cota encontrada: Libro #: " << busq_result + 1<< endl;
 	}
 
 	system("pause");
@@ -182,7 +182,43 @@ int Menu::busq_bin_ram(vector<Libro> &libros_vec) {
 }
 
 int Menu::busq_seq_archivos() {
-	// No implementado...
+	system("cls");
+	cout << "BUSQUEDA SECUENCIAL - ARCHIVOS" << endl;
+	Utils::imprimir_separador('=');
+
+	string nombre_archivo;
+	cout << "Ingrese nombre del archivo (default: " << ARCHIVO_LIBRO_NOMBRE << "): ";
+	getline(cin, nombre_archivo);
+	if (nombre_archivo.empty()) {
+		nombre_archivo = ARCHIVO_LIBRO_NOMBRE;
+	}
+	TArchivo<Libro> archivo(nombre_archivo.c_str());
+
+	char cota[CADENA_MAX] = "";
+	
+	cout << "Ingrese la cota a buscar: ";
+	cin.getline(cota, CADENA_MAX);
+
+	Libro clave;
+	clave.SetCota(cota);
+
+	int result = Busqueda::busq_seq_desord_archivos(archivo, clave);
+
+	switch (result) {
+		case ARCHIVO_ERR_ABRIR:
+			cout << "Error al abrir archvo: " << nombre_archivo;
+			cout << ": El archivo no se ha encontrado." << endl;
+			system("pause");
+			break;
+		case BUSQ_SEQ_ARCHIVO_REG_NO_ENCONTRADO:
+			cout << "La cota no fue encontrada." << endl;
+			break;
+		default:
+			cout << "Cota encontrada: Libro #" << result + 1 << endl;
+			break;
+	}
+
+	system("pause");
 	return 0;
 }
 

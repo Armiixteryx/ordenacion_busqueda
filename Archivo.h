@@ -34,6 +34,7 @@ class TArchivo:public fstream
         int   Eliminar(T &registro);
         T *   GetBuf() { return &this->buf; }
         int   Resetear();
+		int   Contar();
 };
 
 // Anade un registro al final del archivo
@@ -163,6 +164,18 @@ int TArchivo<T>::Resetear() {
 		return ARCHIVO_ERR_ABRIR;
 	close();
 	return 0;
+}
+
+template <class T>
+int TArchivo<T>::Contar() {
+	open(nom, ios::binary | ios::in | ios::ate);
+	if ( fail() || bad() )
+		return ARCHIVO_ERR_ABRIR;
+
+	int cantidad = tellg() / sizeof(buf);
+    close();
+
+    return cantidad;
 }
 
 #endif ARCHIVO_H
