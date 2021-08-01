@@ -11,6 +11,7 @@
 
 #define MENU_ORD_ARCHIVO_SHELLSORT 1
 #define MENU_ORD_ARCHIVO_QUICKSORT 2
+#define MENU_ORD_ARCHIVO_NO_CARGADO -1
 
 #include <vector>
 #include "Libro.h"

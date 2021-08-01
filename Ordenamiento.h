@@ -18,7 +18,7 @@ class Ordenamiento
 
 		            while ((i + ent) < arr_length) {
 		                if (arr[i] > arr[i + ent]) {
-		                    int aux = arr[i];
+		                    T aux = arr[i];
 		                    arr[i] = arr[i + ent];
 		                    arr[i + ent] = aux;
 		                    band = true;
@@ -50,7 +50,7 @@ class Ordenamiento
 		        }
 
 		        if (pos != derecho) {
-		            int aux = arr[pos];
+		            T aux = arr[pos];
 		            arr[pos] = arr[derecho];
 		            arr[derecho] = aux;
 		            pos = derecho;
@@ -61,7 +61,7 @@ class Ordenamiento
 
 		            if (pos != izquierdo) {
 		                band = true;
-		                int aux = arr[pos];
+		                T aux = arr[pos];
 		                arr[pos] = arr[izquierdo];
 		                arr[izquierdo] = aux;
 		                pos = izquierdo;

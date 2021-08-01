@@ -41,7 +41,11 @@ class Libro
 		bool IsDefault();
 		
 		// SOBRECARGAS //
-		bool operator== (const Libro &p) const;
+		bool operator ==(const Libro &p) const;
+		bool operator <(const Libro &b) const;
+		bool operator >(const Libro &b) const;
+		bool operator <=(const Libro &b) const;
+		bool operator >=(const Libro &b) const;
 	protected:
 		char cota[CADENA_MAX];
 		char titulo[CADENA_MAX];

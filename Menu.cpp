@@ -5,6 +5,7 @@
 #include "Archivo.h"
 #include "Libro.h"
 #include "Ordenamiento.h"
+#include <ctime>
 
 using namespace std;
 
@@ -104,13 +105,21 @@ int Menu::ordenamiento_ram(vector<Libro> &libros_vec) {
 	int opcion = 0;
 	do {
 		system("cls");
+		cout << "ORDENAR LIBROS EN RAM" << endl;
+		Utils::imprimir_separador('=');
+		if (libros_vec.empty()) {
+			cout << "Por favor, cargue primero los libros en RAM" << endl;
+			system("pause");
+			return MENU_ORD_ARCHIVO_NO_CARGADO;
+		}
+		system("cls");
 		cout << "ORDENAMIENTO EN RAM" << endl;
 		Utils::imprimir_separador('=');
 		cout << "Seleccione el metodo de ordenamiento a usar." << endl;
 		cout << "1. ShellSort." << endl;
 		cout << "2. QuickSort." << endl;
 		cout << "Su opcion (1-2): ";
-		
+
 		cin >> opcion;
 		cin.ignore();
 
@@ -120,9 +129,12 @@ int Menu::ordenamiento_ram(vector<Libro> &libros_vec) {
 		}
 	} while (opcion < MENU_ORD_ARCHIVO_SHELLSORT || opcion > MENU_ORD_ARCHIVO_QUICKSORT);
 	
+	clock_t t;
+
 	switch (opcion) {
 		case MENU_ORD_ARCHIVO_SHELLSORT:
 			{
+				/*
 				int testcase[] = {15, 67, 8, 16, 44, 27, 12, 35, 56, 21, 13, 28, 60, 36, 7, 10};
 				const int testcase_length = sizeof(testcase) / sizeof(testcase[0]);
 				//Ordenamiento::shell_sort(testcase, testcase_length);
@@ -133,13 +145,22 @@ int Menu::ordenamiento_ram(vector<Libro> &libros_vec) {
 				}
 				cout << endl;
 				system("pause");
+				*/
+				t = clock();
+				Ordenamiento::shell_sort(&libros_vec[0], libros_vec.size());
 				break;
 			}
 		case MENU_ORD_ARCHIVO_QUICKSORT:
+			t = clock();
+			Ordenamiento::quick_sort_recursivo(&libros_vec[0], libros_vec.size());
 			break;
 	}
-	
+
+	t = clock() - t;
+
 	cout << "Los libros en RAM han sido ordenados!" << endl;
+	cout << "Duracion (segs): " << ((float) t) / CLOCKS_PER_SEC << endl;
+	cout << "Duracion (cpu clocks): " << t << endl;
 	system("pause");
 	return 0;
 }

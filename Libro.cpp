@@ -243,7 +243,23 @@ bool Libro::IsDefault() {
 	return *this == Libro::GetDefault();
 }
 
-bool Libro::operator== (const Libro &p) const {
+bool Libro::operator ==(const Libro &p) const {
 	return strcmp(this->cota, p.cota) == 0;
+}
+
+bool Libro::operator <(const Libro &b) const {
+	return strcmp(this->cota, b.cota) < 0;
+}
+
+bool Libro::operator >(const Libro &b) const {
+	return strcmp(this->cota, b.cota) > 0;
+}
+
+bool Libro::operator <=(const Libro &b) const {
+	return strcmp(this->cota, b.cota) <= 0;
+}
+
+bool Libro::operator >=(const Libro &b) const {
+	return strcmp(this->cota, b.cota) >= 0;
 }
 
