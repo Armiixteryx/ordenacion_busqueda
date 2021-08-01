@@ -5,6 +5,7 @@
 #include "Archivo.h"
 #include "Libro.h"
 #include "Ordenamiento.h"
+#include "Busqueda.h"
 #include <ctime>
 #include <string>
 #include <cstdlib>
@@ -135,11 +136,9 @@ int Menu::ordenamiento_ram(vector<Libro> &libros_vec) {
 
 	switch (opcion) {
 		case MENU_ORD_ARCHIVO_SHELLSORT:
-			{
-				t = clock();
-				Ordenamiento::shell_sort(&libros_vec[0], libros_vec.size());
-				break;
-			}
+			t = clock();
+			Ordenamiento::shell_sort(&libros_vec[0], libros_vec.size());
+			break;
 		case MENU_ORD_ARCHIVO_QUICKSORT:
 			t = clock();
 			Ordenamiento::quick_sort_recursivo(&libros_vec[0], libros_vec.size());
@@ -151,7 +150,39 @@ int Menu::ordenamiento_ram(vector<Libro> &libros_vec) {
 	cout << "Los libros en RAM han sido ordenados!" << endl;
 	cout << "Duracion (segs): " << ((float) t) / CLOCKS_PER_SEC << endl;
 	cout << "Duracion (cpu clocks): " << t << endl;
+	cout << "Importante: Puede ver los libros ordenados en el menu: 8. Listar libros en RAM." << endl;
 	system("pause");
+	return 0;
+}
+
+int Menu::busq_bin_ram(vector<Libro> &libros_vec) {
+	system("cls");
+	cout << "BUSQUEDA BINARIA - RAM" << endl;
+	Utils::imprimir_separador('=');
+	
+	char cota[CADENA_MAX] = "";
+
+	cout << "Ingrese la cota a buscar: ";
+	cin.getline(cota, CADENA_MAX);
+
+	Libro libro_busq;
+	libro_busq.SetCota(cota);
+
+	int busq_result = Busqueda::busqueda_binaria<Libro>(&libros_vec[0], libros_vec.size(), libro_busq);
+	
+	if (busq_result == BUSQ_BIN_NO_ENCONTRADO) {
+		cout << "Cota no encontrada" << endl;
+	} else {
+		cout << "Cota encontrada en posicion: " << busq_result << endl;
+	}
+
+	system("pause");
+
+	return 0;
+}
+
+int Menu::busq_seq_archivos() {
+	// No implementado...
 	return 0;
 }
 
@@ -162,7 +193,7 @@ int Menu::ordenamiento_ram(vector<Libro> &libros_vec) {
 // Lista de nombres obtenida de: https://github.com/RandomAPI/Randomuser.me-Node/blob/64fd050d99e1242a9bf219810bc54ecbdc1d76fb/api/.nextRelease/data/IE/lists
 // (Licencia MIT).
 //
-// Procesamiento previo: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=1b90a5ca49506df567aaf8acaeed66b3
+// Procesamiento previo: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=452044e18117058ee5e31b4fe6ca0c5d
 int Menu::generar_libros_random(vector<Libro> &libros_vec) {
 	system("cls");
 	cout << "GENERAR LIBROS" << endl;
@@ -185,6 +216,7 @@ int Menu::generar_libros_random(vector<Libro> &libros_vec) {
 
 		int cota_generada = rand() % COTAS_LENGTH;
 
+		// No repetir cotas en libros nuevos.
 		int j = 0;
 		while (j < cotas_usadas.size()) {
 			if (cota_generada == cotas_usadas[j]) {
@@ -205,7 +237,7 @@ int Menu::generar_libros_random(vector<Libro> &libros_vec) {
 		libros_vec.push_back(libro);
 	}
 
-	cout << "60 libros generados!" << endl;
+	cout << MAX_LIBROS_GENERAR << " libros generados!" << endl;
 
 	string nombre_archivo;
 	cout << "Ingrese nombre del archivo donde guardar los libros (default: " << ARCHIVO_LIBRO_NOMBRE << "): ";
@@ -214,7 +246,7 @@ int Menu::generar_libros_random(vector<Libro> &libros_vec) {
 		nombre_archivo = ARCHIVO_LIBRO_NOMBRE;
 	}
 	TArchivo<Libro> archivo(nombre_archivo.c_str());
-	
+
 	int archivo_res = archivo.Resetear();
 	
 	switch (archivo_res) {

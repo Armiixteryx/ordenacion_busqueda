@@ -20,6 +20,7 @@
 #include <vector>
 #include "Libro.h"
 #include "Ordenamiento.h"
+#include "Busqueda.h"
 
 using namespace std;
 

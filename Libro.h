@@ -42,6 +42,7 @@ class Libro
 		
 		// SOBRECARGAS //
 		bool operator ==(const Libro &p) const;
+		bool operator !=(const Libro &b) const;
 		bool operator <(const Libro &b) const;
 		bool operator >(const Libro &b) const;
 		bool operator <=(const Libro &b) const;

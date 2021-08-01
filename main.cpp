@@ -32,6 +32,7 @@ int main(int argc, char** argv) {
 			case MENU_PRINCIPAL_ORDENAR_ARCHIVO:
 				break;
 			case MENU_PRINCIPAL_BUSQ_BIN_RAM:
+				menu.busq_bin_ram(libros_vec);
 				break;
 			case MENU_PRINCIPAL_BUSQ_SEQ_ARCHIVO:
 				break;
